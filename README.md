@@ -1,4 +1,4 @@
-# devConnect <img src="https://emojis.wiki/thumbs/emojis/man-technologist.webp" height="40px" width = "28px"/>
+# devConnect <img src="https://png.pngtree.com/png-vector/20190307/ourmid/pngtree-vector-programming-icon-png-image_757435.jpg" height="40px" width = "28px"/>
 
 [![Mongo Badge](http://img.shields.io/badge/Database%20-MongoDB-darkgreen?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/)
 &emsp;
