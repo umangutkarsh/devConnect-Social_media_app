@@ -15,8 +15,7 @@
 
 ## Overview
 ### A MERN stack social media app for developers to connect which includes some of the basic app functionalities. 
-
-
+### The frontend is made with ReactJS and NodeJS is used as the Javascript runtime environment. Apart from this MongoDB is the database used and 'mongoose' is used to creat clean models for the documents of the database. ExpressJS is integrated as the server, and Redux is used for state management. 
 
 
 
