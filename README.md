@@ -1,4 +1,4 @@
-# devConnect <img src="https://e7.pngegg.com/pngimages/980/714/png-clipart-computer-icons-code-symbol-coding-miscellaneous-angle.png" height="45px" width = "45px"/>
+# devConnect <img src="https://cdn-icons-png.flaticon.com/512/4396/4396623.png" height="45px" width = "45px"/>
 
 [![Mongo Badge](http://img.shields.io/badge/Database%20-MongoDB-darkgreen?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/)
 &emsp;
