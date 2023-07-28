@@ -10,8 +10,15 @@
 &emsp;
 
 
+
+
+
 ## Overview
 ### A MERN stack social media app for developers to connect which includes some of the basic app functionalities. 
+
+
+
+
 
 
 
@@ -29,6 +36,13 @@
 * 🌐 Browse other developers' profile
 * 🖼️ Add your own avatar
 * 📧 Add your GitHub repos and other link your social media accounts
+
+
+
+
+
+
+
 
 
 ## Work in Progress
