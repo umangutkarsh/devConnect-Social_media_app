@@ -12,7 +12,7 @@ connectDB();
 
 // Init middleware
 // { extended: false }
-// app.use(express.json());
+app.use(express.json());
 
 
 // Define Routes
