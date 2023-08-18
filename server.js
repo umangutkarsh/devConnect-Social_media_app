@@ -1,5 +1,5 @@
 const express = require('express');
-// const connectDB = require('./config/db');
+const connectDB = require('./config/db');
 // const path = require('path');
 
 // const userRoute = require('./routes/api/users');
@@ -12,7 +12,7 @@ const app = express();
 app.get('/', (req, res) => res.send('API running'));
 
 // Connect Database
-// connectDB();
+connectDB();
 
 // Init middleware
 // { extended: false }
