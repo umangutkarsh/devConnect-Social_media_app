@@ -17,18 +17,18 @@ const initialState = {
    user: null
 };
 
-export default function authReducer(state = initialState, action) {
+export default function(state = initialState, action) {
 
    const { type, payload } = action;
    
    switch (type) {
-      // case USER_LOADED:
-      //    return {
-      //       ...state,
-      //       isAuthenticated: true,
-      //       loading: false,
-      //       user: payload
-      //    };
+      case USER_LOADED:
+         return {
+            ...state,
+            isAuthenticated: true,
+            loading: false,
+            user: payload
+         };
       case REGISTER_SUCCESS:
       // case LOGIN_SUCCESS:
          localStorage.setItem('token', payload.token);
@@ -39,6 +39,7 @@ export default function authReducer(state = initialState, action) {
             loading: false
          };
       case REGISTER_FAIL:
+      case AUTH_ERROR:
          localStorage.removeItem('token');
          return {
             ...state,
