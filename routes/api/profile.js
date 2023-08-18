@@ -162,26 +162,24 @@ router.get(
 );
 
 
-// // @route   DELETE api/profile
-// // @desc    Delete profile, user and posts
-// // @access  Private
-// router.delete('/', auth, async (req, res) => {
-//   try {
-//     // Remove user posts
-//     // Remove profile
-//     // Remove user
-//     await Promise.all([
-//       Post.deleteMany({ user: req.user.id }),
-//       Profile.findOneAndRemove({ user: req.user.id }),
-//       User.findOneAndRemove({ _id: req.user.id })
-//     ]);
+// @route   DELETE api/profile
+// @desc    Delete profile, user and posts
+// @access  Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    // Remove user posts
+    
+    // Remove profile
+    await Profile.findOneAndRemove({ user: req.user.id });
+    // Remove user
+    await User.findOneAndRemove({ _id: req.user.id });
 
-//     res.json({ msg: 'User deleted' });
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send('Server Error');
-//   }
-// });
+    res.json({ msg: 'User deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 
 // // @route   PUT api/profile/experience
