@@ -47,7 +47,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        {/* <React.Fragment> */}
           <Navbar />
           <Alert />
           <Routes>
@@ -86,7 +85,6 @@ const App = () => {
             />
             <Route path="/*" element={<NotFound />} />
           </Routes>
-        {/* </React.Fragment> */}
       </Router>
     </Provider>
   );
