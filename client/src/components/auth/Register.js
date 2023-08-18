@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
+// import axios from 'axios';
 
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
@@ -17,12 +18,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   const { name, email, password, password2 } = formData;
 
-  const inputHandler = event => {
+  const inputHandler = event => 
     setFormData({
       ...formData,
       [event.target.name]: event.target.value
     });
-  };
 
   const formSubmitHandler = async event => {
     event.preventDefault();
@@ -32,7 +32,29 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
 
     else {
-      register({ name, email, password });
+      // register({ name, email, password });
+      console.log('success');
+
+      // const newUser = {
+      //   name, 
+      //   email, 
+      //   password
+      // }
+
+      // try {
+      //   const config = {
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     }
+      //   }
+
+      //   const body = JSON.stringify(newUser);
+
+      //   const res = await axios.post('/api/users', body, config);
+      //   console.log(res.data);
+      // } catch (err) {
+      //   console.error(err.response.data);
+      // }
     }
   }; 
 
@@ -49,14 +71,15 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <p className="lead">
         <i className="fas fa-user" /> Create Your Account
       </p>
-      <form className="form" onSubmit={formSubmitHandler}>
+      <form className="form" onSubmit={event => formSubmitHandler(event)}>
         <div className="form-group">
           <input 
             type="text" 
             placeholder="Name" 
             name="name" 
             value={name} 
-            onChange={inputHandler}
+            onChange={event => inputHandler(event)}
+            required
           />
         </div>
         <div className="form-group">
@@ -65,7 +88,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             placeholder="Email Address" 
             name="email"
             value={email}
-            onChange={inputHandler}
+            onChange={event => inputHandler(event)}
+            required
           />
           <small className="form-text">
             This site uses Gravatar so if you want a profile image, use a
@@ -79,7 +103,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="password"
             minLength="6"
             value={password}
-            onChange={inputHandler}
+            onChange={event => inputHandler(event)}
           />
         </div>
         <div className="form-group">
@@ -89,7 +113,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="password2"
             minLength="6"
             value={password2}
-            onChange={inputHandler}
+            onChange={event => inputHandler(event)}
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />

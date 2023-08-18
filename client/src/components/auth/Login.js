@@ -14,16 +14,16 @@ const Login = ({ login, isAuthenticated }) => {
 
   const { email, password } = formData;
 
-  const inputHandler = event => {
+  const inputHandler = event => 
     setFormData({
       ...formData,
       [event.target.name]: event.target.value
     });
-  };
 
   const formSubmitHandler = event => {
     event.preventDefault();
-    login(email, password);
+    // login(email, password);
+    console.log('success');
   }; 
 
   // Redirect if logged in
@@ -40,14 +40,14 @@ const Login = ({ login, isAuthenticated }) => {
       <p className="lead">
         <i className="fas fa-user" /> Sign Into Your Account
       </p>
-      <form className="form" onSubmit={formSubmitHandler}>
+      <form className="form" onSubmit={event => formSubmitHandler(event)}>
         <div className="form-group">
           <input 
             type="email" 
             placeholder="Email Address" 
             name="email"
             value={email}
-            onChange={inputHandler}
+            onChange={event => inputHandler(event)}
             required 
           />
         </div>
@@ -58,7 +58,7 @@ const Login = ({ login, isAuthenticated }) => {
             name="password"
             minLength="6"
             value={password}
-            onChange={inputHandler}
+            onChange={event => inputHandler(event)}
             required
           />
         </div>
