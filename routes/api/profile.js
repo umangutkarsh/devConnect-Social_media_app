@@ -3,7 +3,7 @@ const express = require('express');
 // const config = require('config');
 const router = express.Router();
 const auth = require('../../middleware/check-auth');
-// const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 // // bring in normalize to give us a proper url, regardless of what user entered
 // const normalize = import('normalize-url');
 // // const checkObjectId = require('../../middleware/checkObjectId');
@@ -26,7 +26,7 @@ router.get('/me', auth, async (req, res) => {
     }
 
     res.json(profile);
-    
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -37,45 +37,55 @@ router.get('/me', auth, async (req, res) => {
 // @route   POST api/profile
 // @desc    Create or update user profile
 // @access  Private
-// router.post(
-//   '/',
-//   auth,
-//   check('status', 'Status is required').notEmpty(),
-//   check('skills', 'Skills is required').notEmpty(),
-//   async (req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json({ errors: errors.array() });
-//     }
+router.post(
+  '/',
+  [
+    auth,
+    [
+      check('status', 'Status is required').not().isEmpty(),
+      check('skills', 'Skills is required').not().isEmpty(),
+    ] 
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-//     // destructure the request
-//     const {
-//       website,
-//       skills,
-//       youtube,
-//       twitter,
-//       instagram,
-//       linkedin,
-//       facebook,
-//       // spread the rest of the fields we don't need to check
-//       ...rest
-//     } = req.body;
+    // destructure the request
+    const {
+      company,
+      website,
+      location,
+      bio,
+      status,
+      githubusername,
+      skills,
+      youtube,
+      twitter,
+      instagram,
+      linkedin,
+      facebook,
+      // spread the rest of the fields we don't need to check
+    } = req.body;
 
-//     // build a profile
-//     const profileFields = {
-//       user: req.user.id,
-//       website:
-//         website && website !== ''
-//           ? normalize(website, { forceHttps: true })
-//           : '',
-//       skills: Array.isArray(skills)
-//         ? skills
-//         : skills.split(',').map((skill) => ' ' + skill.trim()),
-//       ...rest
-//     };
+    // build a profile
+    const profileFields = {
+      user: req.user.id,
+      company,
+      website,
+      location,
+      bio,
+      status,
+      githubusername,
+      skills: skills.split(',').map(skill => skill.trim())
+    };
+    console.log(profileFields.skills);
 
-//     // Build socialFields object
-//     const socialFields = { youtube, twitter, instagram, linkedin, facebook };
+    
+
+    // Build socialFields object
+    profileFields.social = { youtube, twitter, facebook, linkedin, instagram };
 
 //     // normalize social fields to ensure valid url
 //     for (const [key, value] of Object.entries(socialFields)) {
@@ -85,20 +95,32 @@ router.get('/me', auth, async (req, res) => {
 //     // add to profileFields
 //     profileFields.social = socialFields;
 
-//     try {
-//       // Using upsert option (creates new doc if no match is found):
-//       let profile = await Profile.findOneAndUpdate(
-//         { user: req.user.id },
-//         { $set: profileFields },
-//         { new: true, upsert: true, setDefaultsOnInsert: true }
-//       );
-//       return res.json(profile);
-//     } catch (err) {
-//       console.error(err.message);
-//       return res.status(500).send('Server Error');
-//     }
-//   }
-// );
+    try {
+      // Using upsert option (creates new doc if no match is found):
+      let profile = await Profile.findOne({ user: req.user.id });
+
+      if (profile) {
+        // Update
+        profile = await Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+        );
+        return res.json(profile);
+      }
+
+      // Create
+      profile = new Profile(profileFields);
+      await profile.save();
+
+      return res.json(profile);
+
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send('Server Error');
+    }
+  }
+);
 
 
 // // @route   GET api/profile
