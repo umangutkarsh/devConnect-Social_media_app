@@ -22,8 +22,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   const formSubmitHandler = event => {
     event.preventDefault();
-    // login(email, password);
-    console.log('success');
+    login(email, password);
   }; 
 
   // Redirect if logged in
