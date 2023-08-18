@@ -32,8 +32,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
 
     else {
-      // register({ name, email, password });
-      console.log('success');
+      register({ name, email, password });
+      
 
       // const newUser = {
       //   name, 
@@ -79,7 +79,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="name" 
             value={name} 
             onChange={event => inputHandler(event)}
-            required
           />
         </div>
         <div className="form-group">
@@ -89,7 +88,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="email"
             value={email}
             onChange={event => inputHandler(event)}
-            required
           />
           <small className="form-text">
             This site uses Gravatar so if you want a profile image, use a
@@ -101,7 +99,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
             value={password}
             onChange={event => inputHandler(event)}
           />
@@ -111,7 +108,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength="6"
             value={password2}
             onChange={event => inputHandler(event)}
           />
