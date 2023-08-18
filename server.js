@@ -2,10 +2,6 @@ const express = require('express');
 const connectDB = require('./config/db');
 // const path = require('path');
 
-// const userRoute = require('./routes/api/users');
-// const authRoute = require('./routes/api/auth');
-// const profileRoute = require('./routes/api/profile');
-// const postsRoute = require('./routes/api/posts');
 
 const app = express();
 
@@ -20,10 +16,10 @@ connectDB();
 
 
 // Define Routes
-// app.use('/api/users', userRoute);
-// app.use('/api/auth', authRoute);
-// app.use('/api/profile', profileRoute);
-// app.use('/api/posts', postsRoute);
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/posts', require('./routes/api/posts'));
 
 
 // // Serve static assets in production
