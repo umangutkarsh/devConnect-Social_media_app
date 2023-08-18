@@ -168,7 +168,7 @@ router.get(
 router.delete('/', auth, async (req, res) => {
   try {
     // Remove user posts
-    
+
     // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
     // Remove user
@@ -185,34 +185,41 @@ router.delete('/', auth, async (req, res) => {
 // // @route   PUT api/profile/experience
 // // @desc    Add profile experience
 // // @access  Private
-// router.put(
-//   '/experience',
-//   auth,
-//   check('title', 'Title is required').notEmpty(),
-//   check('company', 'Company is required').notEmpty(),
-//   check('from', 'From date is required and needs to be from the past')
-//     .notEmpty()
-//     .custom((value, { req }) => (req.body.to ? value < req.body.to : true)),
-//   async (req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json({ errors: errors.array() });
-//     }
+router.put(
+  '/experience',
+  [
+    auth,
+    [
+      check('title', 'Title is required').not().isEmpty(),
+      check('company', 'Company is required').not().isEmpty(),
+      check('from', 'From date is required and needs to be from the past').not().isEmpty()
+    ]
+  ],
+  async (req, res) => {
 
-//     try {
-//       const profile = await Profile.findOne({ user: req.user.id });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-//       profile.experience.unshift(req.body);
+    const { title, company, location, from, to, current, description } = req.body;
+    const newExp = { title, company, location, from, to, current, description };
 
-//       await profile.save();
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
 
-//       res.json(profile);
-//     } catch (err) {
-//       console.error(err.message);
-//       res.status(500).send('Server Error');
-//     }
-//   }
-// );
+      profile.experience.unshift(newExp);
+
+      await profile.save();
+
+      res.json(profile);
+      
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 
 // // @route   DELETE api/profile/experience/:exp_id
