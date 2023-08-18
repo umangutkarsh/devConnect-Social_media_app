@@ -104,8 +104,8 @@ export const login = (email, password) => async dispatch => {
 
 
 // Logout User
-// export const logout = () => dispatch => {
-//    dispatch({ type: LOGOUT })
-// };
+export const logout = () => dispatch => {
+   dispatch({ type: LOGOUT })
+};
 
-export const logout = () => ({ type: LOGOUT });
+// export const logout = () => ({ type: LOGOUT });
