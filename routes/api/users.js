@@ -62,8 +62,6 @@ router.post('/', [
         res.json({ token });
       }
     );
-
-    res.send('User registered');
     
   } catch (err) {
     console.error(err.message);
