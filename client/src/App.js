@@ -56,36 +56,36 @@ const App = () => {
           <Alert />
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="register" element={<Register />} />
-            <Route path="login" element={<Login />} />
-            <Route path="profiles" element={<Profiles />} />
-            <Route path="profile/:user_id" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profiles" element={<Profiles />} />
+            <Route path="/profile/:user_id" element={<Profile />} />
             <Route 
-              path="dashboard" 
+              path="/dashboard" 
               element={<PrivateRoute> <Dashboard /></PrivateRoute>} 
             />
             <Route 
-              path="create-profile" 
+              path="/create-profile" 
               element={<PrivateRoute> <ProfileForm /></PrivateRoute>} 
             />
             <Route 
-              path="edit-profile" 
+              path="/edit-profile" 
               element={<PrivateRoute> <ProfileForm /></PrivateRoute>} 
             />
             <Route 
-              path="add-experience" 
+              path="/add-experience" 
               element={<PrivateRoute> <AddExperience /></PrivateRoute>} 
             />
             <Route 
-              path="add-education" 
+              path="/add-education" 
               element={<PrivateRoute> <AddEducation /></PrivateRoute>} 
             />
             <Route 
-              path="posts" 
+              path="/posts" 
               element={<PrivateRoute> <Posts /></PrivateRoute>} 
             />
             <Route 
-              path="posts/:post_id" 
+              path="/posts/:post_id" 
               element={<PrivateRoute> <Post /></PrivateRoute>} 
             />
             <Route path="/*" element={<NotFound />} />

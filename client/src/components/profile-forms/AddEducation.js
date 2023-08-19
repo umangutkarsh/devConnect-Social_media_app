@@ -5,9 +5,8 @@ import { addEducation } from '../../actions/profile';
 import PropTypes from 'prop-types';
 
 
-const AddEducation = ({ addEducation }) => {
+const AddEducation = ({ addEducation, navigate }) => {
 
-   const navigate = useNavigate();
    const [formData, setFormData] = useState({
       school: '',
       degree: '',
@@ -18,21 +17,18 @@ const AddEducation = ({ addEducation }) => {
       description: ''
    });
 
+   const [toDateDisabled, toggleDisabled] = useState(false);
 
    const { school, degree, fieldofstudy, from, to, current, description } = formData;
 
-   const inputHandler = event => {
+   const inputHandler = event =>
       setFormData({
          ...formData,
          [event.target.name]: event.target.value
       });
-   };
 
-   const formSubmitHandler = event => {
-      event.preventDefault();
-      addEducation(formData).then(() => navigate('/dashboard'));
-   };
- 
+   
+
    return (
       <section className='container'>
          <h1 className="large text-primary">Add Your Experience</h1>
@@ -42,14 +38,17 @@ const AddEducation = ({ addEducation }) => {
          </p>
          <small>* = required field</small>
 
-         <form className="form" onSubmit={formSubmitHandler}>
+         <form className="form" onSubmit={event => {
+            event.preventDefault();
+            addEducation(formData, navigate);
+         }}>
             <div className="form-group">
                <input 
                   type="text" 
                   placeholder="* School or Bootcamp" 
                   name="school" 
                   value={school}
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                   required 
                />
             </div>
@@ -59,7 +58,7 @@ const AddEducation = ({ addEducation }) => {
                   placeholder="* Degree or Certificate" 
                   name="degree"
                   value={degree} 
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                   required 
                />
             </div>
@@ -69,7 +68,7 @@ const AddEducation = ({ addEducation }) => {
                   placeholder="Field of Study" 
                   name="fieldofstudy"
                   value={fieldofstudy} 
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                />
             </div>
             <div className="form-group">
@@ -78,7 +77,7 @@ const AddEducation = ({ addEducation }) => {
                   type="date" 
                   name="from" 
                   value={from}
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                />
             </div>
             <div className="form-group">
@@ -90,6 +89,7 @@ const AddEducation = ({ addEducation }) => {
                      value={current}
                      onChange={() => {
                         setFormData({ ...formData, current: !current });
+                        toggleDisabled(!toDateDisabled);
                      }}
                   /> {' '}Current School or Bootcamp
                </p>
@@ -100,8 +100,8 @@ const AddEducation = ({ addEducation }) => {
                      type="date" 
                      name="to"
                      value={to} 
-                     onChange={inputHandler}
-                     disabled={current}
+                     onChange={event => inputHandler(event)}
+                     disabled={toDateDisabled ? 'diabled' : ''}
                   />
                </div>
             <div className="form-group">
@@ -111,7 +111,7 @@ const AddEducation = ({ addEducation }) => {
                   rows="5"
                   placeholder="Program Description"
                   value={description}
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                />
             </div>
             <input type="submit" className="btn btn-primary my-1" />

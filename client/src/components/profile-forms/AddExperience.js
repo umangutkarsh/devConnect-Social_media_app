@@ -5,9 +5,9 @@ import { addExperience } from '../../actions/profile';
 import PropTypes from 'prop-types';
 
 
-const AddExperience = ({ addExperience }) => {
+const AddExperience = ({ addExperience, navigate }) => {
 
-   const navigate = useNavigate();
+   
    const [formData, setFormData] = useState({
       company: '',
       title: '',
@@ -17,21 +17,17 @@ const AddExperience = ({ addExperience }) => {
       current: false,
       description: ''
    });
-
+   
+   const [toDateDisabled, toggleDisabled] = useState(false);
 
    const { company, title, location, from, to, current, description } = formData;
 
-   const inputHandler = event => {
+   const inputHandler = event => 
       setFormData({
          ...formData,
          [event.target.name]: event.target.value
       });
-   };
 
-   const formSubmitHandler = event => {
-      event.preventDefault();
-      addExperience(formData).then(() => navigate('/dashboard'));
-   };
  
    return (
       <section className='container'>
@@ -44,14 +40,17 @@ const AddExperience = ({ addExperience }) => {
          </p>
          <small>* = required field</small>
 
-         <form className="form" onSubmit={formSubmitHandler}>
+         <form className="form" onSubmit={event => {
+            event.preventDefault();
+            addExperience(formData, navigate);
+         }}>
             <div className="form-group">
                <input 
                   type="text" 
                   placeholder="* Job Title" 
                   name="title" 
                   value={title}
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                   required 
                />
             </div>
@@ -61,7 +60,7 @@ const AddExperience = ({ addExperience }) => {
                   placeholder="* Company" 
                   name="company"
                   value={company} 
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                   required 
                />
             </div>
@@ -71,7 +70,7 @@ const AddExperience = ({ addExperience }) => {
                   placeholder="Location" 
                   name="location"
                   value={location} 
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                />
             </div>
             <div className="form-group">
@@ -80,7 +79,7 @@ const AddExperience = ({ addExperience }) => {
                   type="date" 
                   name="from" 
                   value={from}
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                />
             </div>
             <div className="form-group">
@@ -92,6 +91,7 @@ const AddExperience = ({ addExperience }) => {
                      value={current}
                      onChange={() => {
                         setFormData({ ...formData, current: !current });
+                        toggleDisabled(!toDateDisabled)
                      }}
                   /> {' '}Current Job
                </p>
@@ -102,8 +102,8 @@ const AddExperience = ({ addExperience }) => {
                      type="date" 
                      name="to"
                      value={to} 
-                     onChange={inputHandler}
-                     disabled={current}
+                     onChange={event => inputHandler(event)}
+                     disabled={toDateDisabled ? 'diabled' : ''}
                   />
                </div>
             <div className="form-group">
@@ -113,7 +113,7 @@ const AddExperience = ({ addExperience }) => {
                   rows="5"
                   placeholder="Job Description"
                   value={description}
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                />
             </div>
             <input type="submit" className="btn btn-primary my-1" />

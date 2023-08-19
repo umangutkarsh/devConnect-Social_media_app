@@ -128,10 +128,15 @@ export const createProfile = (formData, navigate, edit = false) => async dispatc
 
 
 // Add Experience
-export const addExperience = formData => async dispatch => {
+export const addExperience = (formData, navigate) => async dispatch => {
 
    try {
-      const responseData = await api.put('/profile/experience', formData);
+      const config = {
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }
+      const responseData = await axios.put('/api/profile/experience', formData, config);
 
       dispatch({
          type: UPDATE_PROFILE,
@@ -139,6 +144,8 @@ export const addExperience = formData => async dispatch => {
       });
 
       dispatch(setAlert('Experience Added', 'success'));
+
+      navigate('/dashboard');
    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -154,10 +161,16 @@ export const addExperience = formData => async dispatch => {
 
 
 // Add Education
-export const addEducation = formData => async dispatch => {
+export const addEducation = (formData, navigate) => async dispatch => {
 
    try {
-      const responseData = await api.put('/profile/education', formData);
+      const config = {
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }
+      
+      const responseData = await axios.put('/api/profile/education', formData, config);
 
       dispatch({
          type: UPDATE_PROFILE,
@@ -165,7 +178,8 @@ export const addEducation = formData => async dispatch => {
       });
 
       dispatch(setAlert('Education Added', 'success'));
-      return responseData.data;
+      
+      navigate('/dashboard');
    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
