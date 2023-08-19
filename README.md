@@ -22,10 +22,17 @@ The frontend is made with ReactJS and NodeJS is used as the Javascript runtime e
 
 
 ### Contents
-* [Quick Start]()
+* [Quick Start](https://github.com/umangutkarsh/devConnect-Social_media_app#quick-start)
+* [Features](https://github.com/umangutkarsh/devConnect-Social_media_app#features)
+* [Work in Progress](https://github.com/umangutkarsh/devConnect-Social_media_app#work-in-progress)
+* [Bugs](https://github.com/umangutkarsh/devConnect-Social_media_app#bugs)
+* [toDo](https://github.com/umangutkarsh/devConnect-Social_media_app#todo---delete-the-comment-and-like-of-deleted-user)
+
+
 
 
 ### Quick Start
+
 Add a default.json file in config folder with the following:
 ```
 "mongoURI": "<your_mongoDB_Atlas_uri_with_credentials>",
@@ -56,6 +63,9 @@ npm run build
 ```
 
 
+
+
+
 ### Features
 
 - 🔒 Authentication (Login, Logout and Register)
@@ -74,6 +84,9 @@ npm run build
 
 
 
+
+
+
 ### Work in Progress
 
 - Some pages not able to render, need to fix some bugs
@@ -81,7 +94,11 @@ npm run build
 
 
 
+
+
+
 ### Bugs
+
 * Some UI issues (Success and Error message not displayed properly, probably need to look in the css and classes)
 * Delete comment (Cannot read properties of undefined (reading 'statusText') TypeError: Cannot read properties of undefined (reading 'statusText') at http://localhost:3000/static/js/bundle.js:757:27)
 * Issues with the github api (repos not loading)
@@ -90,6 +107,9 @@ npm run build
 * Errors when logging out
 * Dashboard issues (name not being displayed after registering, also issues with profile creation and is resolved only after user logs out)
 * Error when deleting account (Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.)
+
+
+
 
 
 ### @toDo - Delete the comment and like of deleted user
