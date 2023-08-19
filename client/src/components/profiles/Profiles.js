@@ -13,9 +13,9 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
    }, [getProfiles]);
 
    return (
-      <section className='container'>
+      <>
          {loading ? (<Spinner />) : (
-            <React.Fragment>
+            <section className='container'>
                <h1 className="large text-primary">Developers</h1>
                <p className="lead">
                   <i className="fab fa-connectdevelop" /> Browse and Connect with Developers
@@ -30,9 +30,9 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                      ))
                   )}
                </div>
-            </React.Fragment>
+            </section>
          )}
-      </section>
+      </>
    );
 };
 
