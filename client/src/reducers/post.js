@@ -70,12 +70,12 @@ export default function postReducer(state = initialState, action) {
       case REMOVE_COMMENT:
          return {
             ...state,
-            // post: state.post.filter(comment => comment._id !== payload),
+            post: state.post.filter(comment => comment._id !== payload),
             // Scrutinze
-            post: {
-               ...state.post,
-               comments: state.post.comments.filter(comment => comment._id !== payload)
-            },
+            // post: {
+            //    ...state.post,
+            //    comments: state.post.comments.filter(comment => comment._id !== payload)
+            // },
             loading: false
          };
       default:

@@ -17,7 +17,7 @@ const CommentForm = ({ post_id, addComment }) => {
    return (
       <div class="post-form">
          <div class="bg-primary p">
-            <h3>Leave a Comment</h3>
+            <h3>Leave a Comment...</h3>
          </div>
          <form class="form my-1" onSubmit={event => formSubmitHandler(event)}>
             <textarea
