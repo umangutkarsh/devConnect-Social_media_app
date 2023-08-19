@@ -2,19 +2,21 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
+import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
 import PropTypes from 'prop-types';
 
 
-const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: { profile } }) => {
+const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: { profile, loading } }) => {
 
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
 
   return (
+    loading && profile === null ? <Spinner /> : (
       <section className='container'>
         <h1 className='large text-primary'>Dashboard</h1>
         <p className='lead'>
@@ -41,6 +43,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
           </>
         )}
       </section>
+    )
   );
 };
 
