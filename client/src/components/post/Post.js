@@ -11,11 +11,11 @@ import PropTypes from 'prop-types';
 
 const Post = ({ getPost, post: { post, loading } }) => {
 
-   const { id } = useParams();
+   const { post_id: id } = useParams();
 
    useEffect(() => {
       getPost(id);
-   }, [getPost, id]);
+   }, [getPost]);
 
    return (loading || post === null ? (<Spinner />) : (
       <section className='container'>

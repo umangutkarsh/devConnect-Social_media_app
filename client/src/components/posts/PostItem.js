@@ -15,7 +15,7 @@ const PostItem = ({ addLike, removeLike, deletePost, auth, post: {
    likes, 
    comments, 
    date 
-} }) => {
+}, showActions }) => {
   return (
       <div className="post bg-white p-1 my-1">
          <div>
@@ -28,6 +28,8 @@ const PostItem = ({ addLike, removeLike, deletePost, auth, post: {
             <p className="my-1">{text}</p>
             <p className="post-date">Posted on: {formatDate(date)}</p>
 
+            {showActions && (
+               <>
                   <button 
                      type="button" 
                      className="btn btn-light" 
@@ -57,9 +59,16 @@ const PostItem = ({ addLike, removeLike, deletePost, auth, post: {
                         <i className="fas fa-times" /> Delete Post
                      </button>
                   )}
+               </>
+            )}
          </div>
       </div>
   );
+};
+
+
+PostItem.defaultProps = {
+   showActions: true
 };
 
 PostItem.propTypes = {
