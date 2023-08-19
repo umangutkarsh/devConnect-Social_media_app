@@ -11,18 +11,18 @@ import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
-const Profile = ({ getProfileById, profile: { profile }, auth }) => {
+const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
 
-   const { id } = useParams();
+   const { user_id: id } = useParams();
 
    useEffect(() => {
       getProfileById(id);
    }, [getProfileById, id]);
 
    return (
-      <section className='container'>
-         {profile === null ? (<Spinner />) : (
-            <React.Fragment>
+      <>
+         {profile === null || loading ? (<Spinner />) : (
+            <section className='container'>
                <Link to="/profiles" className='btn btn-light'>
                   Back to Profiles
                </Link>
@@ -72,9 +72,9 @@ const Profile = ({ getProfileById, profile: { profile }, auth }) => {
                         <ProfileGithub username={profile.githubusername} />
                      )}
                   </div>
-            </React.Fragment>
+            </section>
          )}
-      </section>
+      </>
    )
 };
 
