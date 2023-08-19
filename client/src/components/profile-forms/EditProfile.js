@@ -49,7 +49,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
          }
          setFormData(profileData);
       }
-   }, [getCurrentProfile, loading, profile]);
+   }, [getCurrentProfile, loading, profile, formData]);
 
    const {
       company,
@@ -258,8 +258,5 @@ EditProfile.propTypes = {
    profile: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-   profile: state.profile
-});
 
 export default connect(null, { createProfile, getCurrentProfile })(EditProfile);

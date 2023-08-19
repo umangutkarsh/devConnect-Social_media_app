@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteExperience } from '../../actions/profile';
-import formatDate from '../../utils/formatDate';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 

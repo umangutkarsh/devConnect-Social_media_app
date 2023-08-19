@@ -1,5 +1,4 @@
 import axios from "axios";
-import api from "../utils/api";
 import { setAlert } from "./alert";
 import { 
    ACCOUNT_DELETED, 
