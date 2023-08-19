@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getPosts } from '../../actions/post';
+import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
 import PropTypes from 'prop-types';
 
 
-const Posts = ({ getPosts, post: { posts } }) => {
+const Posts = ({ getPosts, post: { posts, loading } }) => {
 
    useEffect(() => {
       getPosts();
