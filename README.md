@@ -16,6 +16,8 @@
 A MERN stack social media app for developers to connect which includes some of the basic app functionalities.
 The frontend is made with ReactJS and NodeJS is used as the Javascript runtime environment. Apart from this MongoDB is the database used and 'mongoose' is used to create models for the documents of the database. ExpressJS is integrated as the server, and Redux is used for state management.
 
+![devConnect](https://github.com/umangutkarsh/devConnect-Social_media_app/assets/95426993/8ca76f48-fb94-4fe1-ac93-6e1777028304)
+
 
 
 ### Features
