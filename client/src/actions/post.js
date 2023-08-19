@@ -73,14 +73,14 @@ export const removeLike = id => async dispatch => {
 export const deletePost = id => async dispatch => {
 
    try {
-      await axios.delete(`/posts/${id}`);
+      await axios.delete(`/api/posts/${id}`);
 
       dispatch({
          type: DELETE_POST,
          payload: id
       });
 
-      dispatch(setAlert('Post Removed', 'success'));
+      dispatch(setAlert('Post Deleted', 'success'));
    } catch (err) {
       dispatch({
          type: POST_ERROR,
@@ -93,8 +93,13 @@ export const deletePost = id => async dispatch => {
 // Add post
 export const addPost = formData => async dispatch => {
 
+   const config = {
+      headers: {
+         'Content-Type': 'application/json'
+      }
+   }
    try {
-      const responseData = await axios.post(`/posts`, formData);
+      const responseData = await axios.post(`/api/posts`, formData, config);
 
       dispatch({
          type: ADD_POST,

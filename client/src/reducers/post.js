@@ -37,7 +37,7 @@ export default function postReducer(state = initialState, action) {
          return {
             ...state,
             // Scrutinize
-            // posts: state.posts.unshift(payload);
+            // posts: state.posts.unshift(payload),
             posts: [payload, ...state.posts],
             loading: false
          };
