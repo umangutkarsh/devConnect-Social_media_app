@@ -8,7 +8,7 @@ Issues with the github api (repos not loading)
 
 Issues when creating/editing profile, and when adding experience/education (Cannot read properties of undefined (reading 'data')
 TypeError: Cannot read properties of undefined (reading 'data')
-    at http://localhost:3000/static/js/bundle.js:926:33) --- Data is added to the database
+    at http://localhost:3000/static/js/bundle.js:926:33) **Data is added to the database
 
 Some button navigation issues
 
