@@ -198,7 +198,7 @@ export const addEducation = (formData, navigate) => async dispatch => {
 export const deleteExperience = id => async dispatch => {
 
    try {
-      const responseData = await api.delete(`/profile/experience/${id}`);
+      const responseData = await axios.delete(`/api/profile/experience/${id}`);
 
       dispatch({
          type: UPDATE_PROFILE,
@@ -219,7 +219,7 @@ export const deleteExperience = id => async dispatch => {
 export const deleteEducation = id => async dispatch => {
 
    try {
-      const responseData = await api.delete(`/profile/education/${id}`);
+      const responseData = await axios.delete(`/api/profile/education/${id}`);
 
       dispatch({
          type: UPDATE_PROFILE,
@@ -242,7 +242,7 @@ export const deleteAccount = () => async dispatch => {
    if (window.confirm('Are you sure? This cannot be undone')) {
 
       try {
-         await api.delete('/profile');
+         await axios.delete('/api/profile');
    
          dispatch({ type: CLEAR_PROFILE });
          dispatch({ type: ACCOUNT_DELETED });
