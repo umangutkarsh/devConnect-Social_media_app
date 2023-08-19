@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteEducation } from '../../actions/profile';
 import formatDate from '../../utils/formatDate';
+import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
 
@@ -12,7 +13,11 @@ const Education = ({ education, deleteEducation }) => {
          <td>{edu.school}</td>
          <td className="hide-sm">{edu.degree}</td>
          <td>
-            {formatDate(edu.from)} - {edu.to ? formatDate(edu.to) : 'Present'}
+            <Moment format='YYYY/MM/DD'>{exp.from}</Moment> - {
+               exp.to == null ? (' Present'): (
+                  <Moment format='YYYY/MM/DD'>{exp.to}</Moment>
+               )
+            }
          </td>
          <td>
             <button className="btn btn-danger" onClick={() => deleteEducation(edu._id)}>
