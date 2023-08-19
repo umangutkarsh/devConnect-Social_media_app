@@ -1,0 +1,21 @@
+Some UI issues (Success and Error message not displayed properly, probably need to look in the css and classes)
+
+Delete comment (Cannot read properties of undefined (reading 'statusText')
+TypeError: Cannot read properties of undefined (reading 'statusText')
+    at http://localhost:3000/static/js/bundle.js:757:27)
+
+Issues with the github api (repos not loading)
+
+Issues when creating/editing profile, and when adding experience/education (Cannot read properties of undefined (reading 'data')
+TypeError: Cannot read properties of undefined (reading 'data')
+    at http://localhost:3000/static/js/bundle.js:926:33) --- Data is added to the database
+
+Some button navigation issues
+
+Errors when logging out
+
+Dashboard issues (name not being displayed after registering, also issues with profile creation and is resolved only after user logs out)
+
+Error when deleting account (Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.)
+
+@toDo - Delete the comment and like of deleted user.
