@@ -1,3 +1,4 @@
+import axios from "axios";
 import api from "../utils/api";
 import { setAlert } from "./alert";
 import { 
@@ -16,7 +17,7 @@ import {
 export const getCurrentProfile = () => async dispatch => {
 
    try {
-      const responseData = await api.get('/profile/me');
+      const responseData = await axios.get('/api/profile/me');
 
       dispatch({
          type: GET_PROFILE,
