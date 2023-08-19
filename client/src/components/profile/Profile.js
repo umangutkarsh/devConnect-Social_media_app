@@ -41,14 +41,14 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
                         {profile.experience.length === 0 ? (
                            <h4>No Experience credentials</h4>
                         ) : (
-                           <React.Fragment>
+                           <>
                               {profile.experience.map(exp => (
                                  <ProfileExperience 
                                     key={exp._id} 
                                     experience={exp} 
                                  />
                               ))}
-                           </React.Fragment>
+                           </>
                         )}
                      </div>
                      

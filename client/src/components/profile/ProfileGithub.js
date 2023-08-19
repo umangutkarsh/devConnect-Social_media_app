@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getGithubRepos } from '../../actions/profile';
+import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 
 
@@ -8,7 +9,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
 
    useEffect(() => {
       getGithubRepos(username);
-   }, [getGithubRepos, username]);
+   }, [getGithubRepos]);
 
 
    return (
@@ -16,7 +17,8 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
          <h2 class="text-primary my-1">
             <i class="fab fa-github" /> Github Repos
          </h2>
-         {repos.map(repo => (
+         {(
+            repos.map(repo => (
                <div key={repo.id} class="repo bg-white p-1 my-1">
                   <div>
                      <h4>
@@ -34,7 +36,8 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
                      </ul>
                   </div>
                </div>
-            ))}
+            ))
+         )}
       </div>
    );
 };
@@ -50,3 +53,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { getGithubRepos })(ProfileGithub);
+
+
+// Github API not working
