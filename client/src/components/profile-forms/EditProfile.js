@@ -1,34 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../../actions/profile';
-import PropTypes from 'prop-types';
 
 
-const initialState = {
-   company: '',
-   website: '',
-   location: '',
-   status: '',
-   skills: '',
-   githubusername: '',
-   bio: '',
-   twitter: '',
-   facebook: '',
-   linkedin: '',
-   youtube: '',
-   instagram: ''
-};
+const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentProfile, navigate }) => {
 
-const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loading } }) => {
-   
-   const [formData, setFormData] = useState(initialState);
+   const [formData, setFormData] = useState({
+      company: '',
+      website: '',
+      location: '',
+      status: '',
+      skills: '',
+      githubusername: '',
+      bio: '',
+      twitter: '',
+      facebook: '',
+      linkedin: '',
+      youtube: '',
+      instagram: ''
+   });
 
-   const creatingProfile = useParams('/create-profile');
-
-   const [socialInputs, toggleSocialInputs] = useState(false);
-
-   const navigate = useNavigate();
+   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
    useEffect(() => {
       if (!profile) {
@@ -36,7 +30,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
       }
 
       if (!loading && profile) {
-         const profileData = { ...initialState };
+         const profileData = { ...formData };
 
          for (const key in profile) {
             if (key in profileData) {
@@ -72,28 +66,17 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
       instagram
    } = formData;
 
-   const inputHandler = event => {
-      setFormData({
-         ...formData,
-         [event.target.name]: event.target.value
-      });
-   };
+   const inputHandler = event => setFormData({ ...formData, [event.target.name]: event.target.value });
 
    const formSubmitHandler = event => {
-      const editing = profile ? true : false;
       event.preventDefault();
-      createProfile(formData, editing).then(() => {
-         if (!editing) {
-            navigate('/dashboard');
-         }
-      });
+      createProfile(formData, navigate);
    };
 
-
-   return ( 
+   return (
       <section className='container'>
          <h1 className="large text-primary">
-            {creatingProfile ? 'Create Your Profile' : 'Edit Your Profile'}
+            Create your Profile
          </h1>
          <p className="lead">
             <i className="fas fa-user" /> 
@@ -103,9 +86,9 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                }
          </p>
          <small>* = required field</small>
-         <form className="form" onSubmit={formSubmitHandler}>
+         <form className="form" onSubmit={event => formSubmitHandler(event)}>
             <div className="form-group">
-               <select name="status" value={status} onChange={inputHandler}>
+               <select name="status" value={status} onChange={event => inputHandler(event)}>
                   <option value="0">* Select Professional Status</option>
                   <option value="Developer">Developer</option>
                   <option value="Junior Developer">Junior Developer</option>
@@ -126,7 +109,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                   placeholder="Company" 
                   name="company" 
                   value={company} 
-                  onChange={inputHandler} 
+                  onChange={event => inputHandler(event)} 
                />
                <small className="form-text">
                   Could be your own company or one you work for
@@ -138,7 +121,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                   placeholder="Website" 
                   name="website"
                   value={website}
-                  onChange={inputHandler} 
+                  onChange={event => inputHandler(event)} 
                />
                <small className="form-text">
                   Could be your own or a company website
@@ -150,7 +133,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                   placeholder="Location" 
                   name="location"
                   value={location}
-                  onChange={inputHandler} 
+                  onChange={event => inputHandler(event)} 
                />
                <small className="form-text">
                   City & state suggested (eg. Boston, MA)
@@ -162,7 +145,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                   placeholder="* Skills" 
                   name="skills"
                   value={skills}
-                  onChange={inputHandler} 
+                  onChange={event => inputHandler(event)} 
                />
                <small className="form-text">
                   Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
@@ -174,7 +157,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                   placeholder="Github Username"
                   name="githubusername"
                   value={githubusername}
-                  onChange={inputHandler}
+                  onChange={event => inputHandler(event)}
                />
                <small className="form-text">
                   If you want your latest repos and a Github link, include your username
@@ -185,14 +168,14 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                   placeholder="A short bio of yourself" 
                   name="bio"
                   value={bio}
-                  onChange={inputHandler} 
+                  onChange={event => inputHandler(event)} 
                />
                <small className="form-text">Tell us a little about yourself</small>
             </div>
 
             <div className="my-2">
                <button 
-                  onClick={() => toggleSocialInputs(!socialInputs)} 
+                  onClick={() => toggleSocialInputs(!displaySocialInputs)} 
                   type="button" 
                   className="btn btn-light"
                >
@@ -201,7 +184,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                <span>Optional</span>
             </div>
 
-            {socialInputs && (
+            {displaySocialInputs && (
                <React.Fragment>
                   <div className="form-group social-input">
                      <i className="fab fa-twitter fa-2x"></i>
@@ -210,7 +193,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                         placeholder="Twitter URL" 
                         name="twitter"
                         value={twitter}
-                        onChange={inputHandler} 
+                        onChange={event => inputHandler(event)} 
                      />
                   </div>
 
@@ -221,7 +204,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                         placeholder="Facebook URL" 
                         name="facebook"
                         value={facebook}
-                        onChange={inputHandler} 
+                        onChange={event => inputHandler(event)} 
                      />
                   </div>
 
@@ -232,7 +215,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                         placeholder="YouTube URL" 
                         name="youtube"
                         value={youtube}
-                        onChange={inputHandler} 
+                        onChange={event => inputHandler(event)} 
                      />
                   </div>
 
@@ -243,7 +226,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                         placeholder="Linkedin URL" 
                         name="linkedin"
                         value={linkedin}
-                        onChange={inputHandler} 
+                        onChange={event => inputHandler(event)} 
                      />
                   </div>
 
@@ -254,7 +237,7 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
                         placeholder="Instagram URL" 
                         name="instagram" 
                         value={instagram} 
-                        onChange={inputHandler} 
+                        onChange={event => inputHandler(event)} 
                      />
                   </div>
                </React.Fragment>
@@ -264,12 +247,12 @@ const ProfileForm = ({ createProfile, getCurrentProfile, profile: { profile, loa
             <Link className="btn btn-light my-1" to="/dashboard">
                Go Back
             </Link>
-         </form>   
+         </form>
       </section>
-   );
-};
+   )
+}
 
-ProfileForm.propTypes = {
+EditProfile.propTypes = {
    createProfile: PropTypes.func.isRequired,
    getCurrentProfile: PropTypes.func.isRequired,
    profile: PropTypes.object.isRequired
@@ -279,4 +262,4 @@ const mapStateToProps = state => ({
    profile: state.profile
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(ProfileForm);
+export default connect(null, { createProfile, getCurrentProfile })(EditProfile);

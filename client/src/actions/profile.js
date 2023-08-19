@@ -90,10 +90,18 @@ export const getGithubRepos = username => async dispatch => {
 
 
 // Create or update profile
-export const createProfile = (formData, edit = false) => async dispatch => {
+export const createProfile = (formData, navigate, edit = false) => async dispatch => {
   
    try {
-      const responseData = await api.post('/profile', formData);
+      const config = {
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }
+
+      const responseData = await axios.post('/api/profile', formData, config);
+
+      // const responseData = await api.post('/profile', formData);
 
       dispatch({
          type: GET_PROFILE,
@@ -101,6 +109,10 @@ export const createProfile = (formData, edit = false) => async dispatch => {
       });
 
       dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
+
+      if (!edit) {
+         navigate('/dashboard');
+      }
    } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
