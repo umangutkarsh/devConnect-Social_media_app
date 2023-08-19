@@ -14,6 +14,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
    }, [getPosts]);
 
    return (
+      loading ? (<Spinner />) : (
          <section className='container'>
             <h1 className="large text-primary">Posts</h1>
             <p className="lead">
@@ -26,6 +27,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
                ))}
             </div>
          </section>
+      )
    );
 };
 
